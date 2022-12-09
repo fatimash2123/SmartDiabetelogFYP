@@ -1,15 +1,23 @@
 import path from "path";
 import React,{useState} from "react";
+<<<<<<< HEAD
 import {View,Button,Text,StyleSheet, SafeAreaView, ScrollView, Keyboard, Alert, TouchableOpacity,Image} from "react-native";
+=======
+import {View,Button,Text,StyleSheet, SafeAreaView, ScrollView, Keyboard, Alert, TouchableOpacity} from "react-native";
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
 import { Input } from "../components/input";
 import colors from "../../files/Colors";
 import { MyButton } from "../components/button";
 import { MainHeading } from "../components/mainHeading";
 import Loader from "../components/loader";
 import generalStyles from "../../files/generalStyle";
+<<<<<<< HEAD
 import PageHeading from "../components/PageHeading";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { title } from "process";
+=======
+import AsyncStorage from '@react-native-async-storage/async-storage';
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
 
 
 
@@ -88,7 +96,11 @@ const login=()=>{
     setTimeout(()=>{
         setLoader(false);
         try{
+<<<<<<< HEAD
             navigation.navigate("HomeScreen");
+=======
+        navigation.navigate("Home");
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
         }
         catch(error){
             Alert.alert("Error","Something went wrong")
@@ -110,12 +122,19 @@ const handleErrorMessage=(newerrorMessage,inputType)=>{
 
 
 
+<<<<<<< HEAD
 return(<SafeAreaView style={styles.container}>
   <Loader visible={loader}/>
   <ScrollView style={styles.scrollViewContainer}> 
   {/* <MainHeading heading="login"  style={{width:"100%"}}/> */}
   <Image style={styles.headImage} resizeMode={"contain"} source={require("../../../assets/Images/login1.jpg")}/>
    <Text style={styles.heading}>Login</Text>
+=======
+return(<SafeAreaView style={[generalStyles.container,styles.container]}>
+  <Loader visible={loader}/>
+  <ScrollView style={styles.scrollViewContainer}> 
+  <MainHeading heading="login"  style={{width:"100%"}}/>
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
   <View style={{marginHorizontal:"10%",flex:1}}>
   <Input 
           label="Email" 
@@ -135,9 +154,12 @@ return(<SafeAreaView style={styles.container}>
           errorMessage={errorMessages.password}
           onFocus={()=>{handleErrorMessage(null,"password")}}
           />
+<<<<<<< HEAD
           <TouchableOpacity onPress={()=>{navigation.navigate("ForgetPassword")}}>
               <Text >Forgot password?</Text>
       </TouchableOpacity>
+=======
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
       <MyButton title="Login" onPress={validation}/>
 
       <TouchableOpacity onPress={()=>{navigation.navigate("Registration")}}>
@@ -151,16 +173,29 @@ return(<SafeAreaView style={styles.container}>
 
  const styles=StyleSheet.create({
   container:{  
+<<<<<<< HEAD
       flex:1,
       backgroundColor:"white",
   },
   scrollViewContainer:{
       width:"100%",
  
+=======
+      backgroundColor:colors.white,
+ 
+
+  },
+  scrollViewContainer:{
+      width:"100%",
+      paddingTop:10,
+      paddingHorizontal:"5%",
+      marginVertical:"10%"
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
   },
   forgetPasswordText:{
       textAlign:"center",
       fontWeight:"bold",
+<<<<<<< HEAD
       color:colors.darkGreyBlue,
       marginTop: 4
   },
@@ -178,6 +213,11 @@ return(<SafeAreaView style={styles.container}>
   },
 
   
+=======
+      marginTop:-15,
+      color:colors.darkGreyBlue
+  }
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
 });
 
 

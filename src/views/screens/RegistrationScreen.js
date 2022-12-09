@@ -1,12 +1,19 @@
 import React,{useState} from "react";
+<<<<<<< HEAD
 import {View,Text,StyleSheet, SafeAreaView,StatusBar, ScrollView, Keyboard, Alert, TouchableOpacity,Image} from "react-native";
+=======
+import {View,Text,StyleSheet, SafeAreaView,StatusBar, ScrollView, Keyboard, Alert, TouchableOpacity} from "react-native";
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
 import Colors from "../../files/Colors";
 import { MyButton } from "../components/button";
 import { Input } from "../components/input";
 import { MainHeading } from "../components/mainHeading";
 import Loader from "../components/loader";
 import generalStyles from "../../files/generalStyle";
+<<<<<<< HEAD
 
+=======
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
 import colors from "../../files/Colors";
 
 
@@ -102,14 +109,22 @@ export const Registeration=function({navigation}){
     }
 
     return (
+<<<<<<< HEAD
         <SafeAreaView style={styles.container}>
+=======
+        <SafeAreaView style={generalStyles.container}>
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
             <StatusBar backgroundColor="#495057" barStyle="light-content"></StatusBar>
             <Loader visible={loader}/>
             <ScrollView style={styles.scrollViewContainer}
             showsVerticalScrollIndicator={false}>
+<<<<<<< HEAD
                 {/* <MainHeading heading="registration" style={{width:"100%"}}/> */}
                 <Image style={styles.headImage} resizeMode={"contain"} source={require("../../../assets/Images/register.jpg")}/>
                 <Text style={styles.heading}>Register</Text>
+=======
+                <MainHeading heading="registration" style={{width:"100%"}}/>
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
                 <View style={{marginHorizontal:"10%",flex:1}}>
                 <Input 
                 label="Name" 
@@ -147,7 +162,11 @@ export const Registeration=function({navigation}){
                 onFocus={()=>{handleErrorMessage(null,"cpassword")}}
                 />
                 <MyButton title="Register" onPress={validation}/>
+<<<<<<< HEAD
                 <TouchableOpacity onPress={()=>navigation.navigate("EnterCode")}>
+=======
+                <TouchableOpacity onPress={()=>navigation.navigate("Login")}>
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
                     <Text style={styles.loginText}  >Already have an account? Login</Text>
                 </TouchableOpacity>
 
@@ -163,11 +182,23 @@ export const Registeration=function({navigation}){
 const styles=StyleSheet.create({
     container:{
         flex:1,
+<<<<<<< HEAD
         backgroundColor:"white"
+=======
+        backgroundColor:Colors.white
+    },
+    scrollViewContainer:{
+        width:"100%",
+
+        paddingTop:10,
+        paddingHorizontal:"5%",
+        marginVertical:"10%"
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
     },
     loginText:{
         textAlign:"center",
         fontWeight:"bold",
+<<<<<<< HEAD
         color:colors.darkGreyBlue,
         marginTop: 4
  
@@ -187,5 +218,10 @@ const styles=StyleSheet.create({
             marginBottom: 15,
             marginTop: 10
       }
+=======
+        color:colors.darkGreyBlue
+ 
+    }
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
   
 })

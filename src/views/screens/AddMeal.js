@@ -5,9 +5,14 @@ import PageHeading from '../components/PageHeading';
 export default AddMeal = function ({navigation}) {
 
   return (
+<<<<<<< HEAD
     <SafeAreaView style={{flex:1, backgroundColor: 'white'}}>
       <Image style={styles.headImage} resizeMode={"contain"} source={require('../../../assets/head3.jpg')}/>
       <Text style={styles.heading}>Add Meal</Text>
+=======
+    <SafeAreaView style={{flex:1}}>
+      <PageHeading title="Add Meal" image ={require('../../../assets/head3.jpg')} />
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
       <ScrollView style={styles.scrollViewCon}>
         <TextInput style={styles.input} placeholder='Enter Dish name'/>
         <TextInput style={styles.input} placeholder='Enter Calories'/>
@@ -26,8 +31,12 @@ const styles = StyleSheet.create({
   scrollViewCon:{
     flex:1,
     marginTop: 30,
+<<<<<<< HEAD
     padding: 5,
     backgroundColor: 'white'
+=======
+    padding: 5
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
   },
   input: {
      width: '90%',
@@ -43,6 +52,7 @@ const styles = StyleSheet.create({
     textAlign:"center",
     justifyContent:"center",
     alignSelf: 'center',
+<<<<<<< HEAD
     marginTop: 19,
     borderRadius: 10
     },
@@ -66,5 +76,15 @@ const styles = StyleSheet.create({
           fontWeight: "bold",
           color: 'black',
           margin: 15
+=======
+    marginTop: 19
+    },
+    buttonText:{
+        color: 'white',
+        textAlign:"center",
+        fontWeight:"bold",
+        fontSize:16,
+      
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
     }
 });

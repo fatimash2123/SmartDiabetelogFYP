@@ -31,7 +31,11 @@ export default function Home({navigation}){
 
                 <View style={styles.container1}>
                     <TouchableOpacity style={[styles.container1box,{backgroundColor:"#DDBEA9"}]}
+<<<<<<< HEAD
                     onPress={()=>{navigation.navigate("DietFirstMain")}}>
+=======
+                    onPress={()=>{navigation.navigate("Diet")}}>
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
                     <View >
                         <Text style={styles.container1text}>diet</Text>
                     </View>
@@ -53,20 +57,32 @@ export default function Home({navigation}){
                 </View>
 
                 <View style={styles.container3}>
+<<<<<<< HEAD
                     <TouchableOpacity style={[styles.container3box,{backgroundColor:"#A1A497"}]}
                     onPress={()=>{navigation.navigate("MedicationMain")}}>
+=======
+                    <TouchableOpacity style={[styles.container3box,{backgroundColor:"#A1A497"}]}>
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
                     <View>
                         <Text style={styles.container3text}>medication</Text>
                     </View>
                     </TouchableOpacity>
+<<<<<<< HEAD
                     <TouchableOpacity style={[styles.container3box,{backgroundColor:"#898D7D"}]}
                     onPress={()=>{navigation.navigate('HomeScreen')}}>
+=======
+                    <TouchableOpacity style={[styles.container3box,{backgroundColor:"#898D7D"}]}>
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
                     <View>
                         <Text style={styles.container3text}>retinopethy</Text>
                     </View>
                     </TouchableOpacity>
+<<<<<<< HEAD
                     <TouchableOpacity style={[styles.container3box,{backgroundColor:"#A5A58D"}]}
                     onPress={()=>{navigation.navigate('AllergicReactionMain')}}>
+=======
+                    <TouchableOpacity style={[styles.container3box,{backgroundColor:"#A5A58D"}]}>
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
                     <View>
                         <Text style={styles.container3text}>allergic reaction </Text>
                     </View>
