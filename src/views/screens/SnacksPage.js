@@ -28,6 +28,12 @@ export default SnacksPage = function ({navigation}) {
         <Text style={styles.mainHeading}>Snacks</Text>
 
         <View style={styles.mealView}>
+<<<<<<< HEAD
+=======
+          <TouchableOpacity style={styles.buttonADD} onPress={addMealOpen}>
+            <Text style={styles.buttonTextADD}>Add Meal</Text>
+          </TouchableOpacity>
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
           <ScrollView>
             <MealCard
               image={require('../../../assets/Images/recipe.jpg')}
@@ -43,9 +49,12 @@ export default SnacksPage = function ({navigation}) {
           </ScrollView>
         </View>
       </View>
+<<<<<<< HEAD
       <TouchableOpacity style={styles.addButton} onPress={addMealOpen}>
             <Text style={styles.addButtonText}>+</Text>
       </TouchableOpacity>
+=======
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
     </View>
   );
 };
@@ -74,7 +83,11 @@ const styles = StyleSheet.create({
     width: 370,
     height: 50,
     justifyContent: 'center',
+<<<<<<< HEAD
     backgroundColor: '#DDBEA9',
+=======
+    backgroundColor: '#D8D887',
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
     borderRadius: 15,
 
     margin: 10,
@@ -82,14 +95,20 @@ const styles = StyleSheet.create({
   buttonText: {
     textAlign: 'center',
     fontSize: 23,
+<<<<<<< HEAD
     color: 'black',
     // fontWeight: 'bold',
+=======
+    color: 'white',
+    fontWeight: 'bold',
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
   },
 
   mealView: {
     flex: 1,
     flexDirection: 'column',
   },
+<<<<<<< HEAD
   addButton:{
     position:"absolute",  
     bottom:"5%",
@@ -106,4 +125,20 @@ addButtonText:{
     // fontWeight:"bold",
     color:"black"
 },     
+=======
+  buttonADD: {
+    width: 80,
+    backgroundColor: '#cb997e',
+    height: 35,
+    borderRadius: 5,
+    marginRight: 15,
+    alignSelf: 'flex-end',
+    margin: 10,
+  },
+  buttonTextADD: {
+    color: 'white',
+    textAlign: 'center',
+    padding: 4,
+  },
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
 });

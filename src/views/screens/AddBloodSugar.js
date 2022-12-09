@@ -15,7 +15,11 @@ export default AddBloodSugar=function({navigation}){
             <MainHeading heading="Add Blood Sugar"/>
             <ScrollView style={[generalStyles.spacing,styles.scroll]} showsVerticalScrollIndicator={false}>
 
+<<<<<<< HEAD
              <Picker pickertitle="Select Time" pickermode="time" textColor='black' buttonColor='#86C0DD'/>
+=======
+             <Picker pickertitle="Select Time" pickermode="time"/>
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
 
                 <Input label="Blood Sugar Concentration" 
                 placeholder="Enter your Blood Sugar"  
@@ -46,7 +50,11 @@ export default AddBloodSugar=function({navigation}){
 
               <MyDropDown dropdownlist={["Before Breakfast","After Breakfast","Before Lunch",
                "After Lunch","Before Dinner","After Dinner","Random"]}
+<<<<<<< HEAD
                title="Event" buttonColor='#86C0DD' />
+=======
+               title="Event" />
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
 
 
                <Input label="Notes" 
@@ -79,7 +87,11 @@ const styles=StyleSheet.create({
         flexDirection:"row"
     },
     radioButton:{
+<<<<<<< HEAD
         backgroundColor:'buttonColor',
+=======
+        backgroundColor:colors.headingBlue,
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
         width:"20%",
         height:"100%",
         borderRadius:100,

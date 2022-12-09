@@ -81,7 +81,11 @@ const styles=StyleSheet.create({
         backgroundColor:"#DDBEA9",
         marginVertical:"3%",
         marginHorizontal:"3%",
+<<<<<<< HEAD
         // borderRadius:30,
+=======
+        borderRadius:30,
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
         padding:"2%"
     },
     saveButtonContainer:{

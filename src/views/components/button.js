@@ -13,6 +13,7 @@ export const MyButton=( {title, onPress=()=>{}})=>{
 }
 
 const styles=StyleSheet.create({
+<<<<<<< HEAD
     touchOpacity:{ 
         // backgroundColor: "#86C0DD",
         // width:"100%",
@@ -37,6 +38,22 @@ const styles=StyleSheet.create({
         textAlignVertical: "center",
         padding: 5,
         fontWeight: "bold"
+=======
+    touchOpacity:{ backgroundColor:colors.headingBlue,
+    width:"100%",
+    height:40,
+    alignSelf:"center",
+    justifyContent:"center",
+    alignItems:"center",
+    marginVertical:15
+
+    },
+    text:{
+        color:colors.darkGreyBlue,
+        textAlign:"center",
+        fontWeight:"bold",
+        fontSize:16
+>>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
         
     }
 })
