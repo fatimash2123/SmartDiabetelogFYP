@@ -32,14 +32,8 @@ export default DietChartMain = function ({navigation}) {
   };
   return (
     <SafeAreaView style={styles.safeAreaCont}>
-<<<<<<< HEAD
       <Image style={styles.headImage} resizeMode={"contain"} source={require('../../../assets/head3.jpg')}/>
       <Text style={styles.heading}>Diet Chart</Text>
-=======
-      <View style={{flex: 0.32}}>
-        <PageHeading title="Diet Chart" image ={require('../../../assets/head3.jpg')} />
-      </View>
->>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
       <View style={styles.dietInfo}>
         <Text style={styles.caloriesNumber}>560</Text>
         <Text style={styles.calories}>calories consumed</Text>
@@ -135,11 +129,7 @@ export default DietChartMain = function ({navigation}) {
 const styles = StyleSheet.create({
   safeAreaCont: {
     flex: 1,
-<<<<<<< HEAD
     backgroundColor: 'white',
-=======
-    backgroundColor: '#E6E6B0',
->>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
   },
   scrollContainer: {
     flex: 1,
@@ -147,20 +137,12 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   dietInfo: {
-<<<<<<< HEAD
     borderWidth:1,
     flex: 0.5,
     backgroundColor: 'white',
     height: 80,
     borderRadius: 25,
     // paddingTop: 20,
-=======
-    flex: 0.7,
-    backgroundColor: 'white',
-    height: 80,
-    borderRadius: 25,
-    paddingTop: 20,
->>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
     margin: 10,
     width: 370,
   },
@@ -178,13 +160,8 @@ const styles = StyleSheet.create({
   },
   smallCon: {
     backgroundColor: 'white',
-<<<<<<< HEAD
     height: 70,
     flex: 0.5,
-=======
-    height: 100,
-    flex: 1,
->>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
     marginLeft: 10,
     borderRadius: 20,
     paddingTop: 5,
@@ -223,16 +200,12 @@ const styles = StyleSheet.create({
     margin: 8,
     borderRadius: 25,
     padding: 5,
-<<<<<<< HEAD
     borderWidth:1
-=======
->>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
   },
   Foodtext: {
     fontSize: 20,
     textAlign: 'center',
   },
-<<<<<<< HEAD
   headImage:{
     width:"90%",
     height: 120,
@@ -247,6 +220,4 @@ const styles = StyleSheet.create({
         color: 'black',
         margin: 15
   }
-=======
->>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
 });

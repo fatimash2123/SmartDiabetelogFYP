@@ -2,16 +2,10 @@ import React, { useState } from "react";
 import { View,Text, SafeAreaView,StyleSheet, Button, TouchableOpacity, ImageBackground } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import colors from "../../files/Colors";
-<<<<<<< HEAD
 import { useNavigation } from '@react-navigation/native';
 
 
 export default Picker=({pickertitle,pickermode,textColor,buttonColor, onConfirm})=>{
-=======
-
-
-export default Picker=({pickertitle,pickermode,textColor,buttonColor})=>{
->>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
     const [date,setDate]=useState(new Date());
     const[day,setDay]=useState(date.getDate());
     const[month,setMonth]=useState(date.getMonth());
@@ -19,7 +13,6 @@ export default Picker=({pickertitle,pickermode,textColor,buttonColor})=>{
     const[hour,setHour]=useState(date.getHours());
     const[minute,setMinute]=useState(date.getMinutes());
     const [isVisible,setIsVisible]=useState(false);
-<<<<<<< HEAD
 
     const[fulldate , setFullDate] = useState(`${date.getDate()}-${month}-${year}`);
     const[time, setTime] = useState(`${hour>12?hour-12:hour}:${minute} ${hour>=12?"PM":"AM"}`);
@@ -41,8 +34,6 @@ export default Picker=({pickertitle,pickermode,textColor,buttonColor})=>{
         onConfirm([fullTime, fulldate, time]);
         
     }
-=======
->>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
     
     return(
         <View>
@@ -66,27 +57,8 @@ export default Picker=({pickertitle,pickermode,textColor,buttonColor})=>{
             <DateTimePickerModal
             isVisible={isVisible}
             onCancel={()=>{setIsVisible(false)}}
-<<<<<<< HEAD
             onConfirm={handleConfirm}
              mode={pickermode}
-=======
-            onConfirm={(date)=>{
-                setDate(date);
-                if(pickermode==="date"){
-                    setDay(date.getDate())
-                    setMonth(date.getMonth())
-                    setYear(date.getYear())
-                }
-                if(pickermode==="time"){
-                    setHour(date.getHours())
-                    setMinute(date.getMinutes())
-                }
-                setIsVisible(false);
-            }}
-             mode={pickermode}
-
-
->>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
             />
 
 
@@ -108,11 +80,7 @@ const styles=StyleSheet.create({
     },
     button:{
         height:50,
-<<<<<<< HEAD
         // borderRadius:50,   
-=======
-        borderRadius:50,   
->>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
         alignItems:"center",
         justifyContent:"center", 
     },

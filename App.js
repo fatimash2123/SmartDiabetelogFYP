@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import {View,Button,Text,StyleSheet, ImageComponent} from "react-native";
-=======
-import {View,Button,Text,StyleSheet} from "react-native";
->>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
 
 import { Registeration } from "./src/views/screens/RegistrationScreen";
 import { NavigationContainer } from "@react-navigation/native";
@@ -25,7 +21,6 @@ import LunchPage from "./src/views/screens/LunchPage";
 import DinnerPage from "./src/views/screens/DinnerPage";
 import BreakfastPage from "./src/views/screens/BreakfastPage";
 import AddMeal from "./src/views/screens/AddMeal";
-<<<<<<< HEAD
 import FirstScreen from "./src/views/screens/FirstScreen";
 import MedicationMain from "./src/views/screens/MedicationMain";
 import OralMed from "./src/views/screens/OralMed";
@@ -43,8 +38,6 @@ import ForgetPassword from "./src/views/screens/ForgetPassword";
 import EnterCode from "./src/views/screens/EnterCode";
 import Retinopathy from "./src/views/screens/Retinopathy";
 import Profile from "./src/views/screens/Profile";
-=======
->>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
 const Stack = createNativeStackNavigator();
 
 export default function App(){
@@ -63,17 +56,11 @@ export default function App(){
 
   return(
     <NavigationContainer>
-<<<<<<< HEAD
      
       <Stack.Navigator
       screenOptions={{headerShown:false}}
       >
         <Stack.Screen name="FirstScreen" component={FirstScreen} />
-=======
-      <Stack.Navigator
-      screenOptions={{headerShown:false}}
-      >
->>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
         <Stack.Screen name="Registration" component={Registeration} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Loading" component={Loading}/>
@@ -91,7 +78,6 @@ export default function App(){
         <Stack.Screen name="Dinner" component={DinnerPage} />
         <Stack.Screen name="Breakfast" component={BreakfastPage} />
         <Stack.Screen name="AddMeal" component={AddMeal} />
-<<<<<<< HEAD
         <Stack.Screen name="MedicationMain" component={MedicationMain}/>
         <Stack.Screen name="OralMed" component={OralMed}/>
         <Stack.Screen name="AddOralMedicine" component={AddOralMedicine}/>
@@ -109,8 +95,6 @@ export default function App(){
         <Stack.Screen name="Retinopathy" component={Retinopathy}/>
         <Stack.Screen name="Profile" component={Profile}/>
 
-=======
->>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
         {/* {
           isloggedIn===null ? 
           (

@@ -45,13 +45,8 @@ export default ViewBloodSugar=({navigation})=>{
         },
     ]
  return(   
-<<<<<<< HEAD
  <SafeAreaView>
         <MainHeading heading="Blood Sugar" backgroundColor='#86C0DD'/> 
-=======
- <SafeAreaView style={[generalStyles.container]}>
-        <MainHeading heading="Blood Sugar"/> 
->>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
 
         <FlatList 
         style={[generalStyles.spacing,styles.flatlist]}
@@ -97,11 +92,7 @@ const styles=StyleSheet.create({
         flexDirection:"row",
         margin:"1%",
         height:150,
-<<<<<<< HEAD
         borderColor:'#86C0DD'
-=======
-        borderColor:colors.headingBlue
->>>>>>> 687ab0208c4b4918ea417e53315afa48a79e3f00
          
     },
     box1:{
