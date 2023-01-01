@@ -6,9 +6,10 @@ import { Input } from "../components/input";
 import { MainHeading } from "../components/mainHeading";
 import Loader from "../components/loader";
 import generalStyles from "../../files/generalStyle";
-
 import colors from "../../files/Colors";
-
+import{registeration} from "../connectionToDB/authentication"
+import {sendOTP} from "../connectionToDB/authentication"
+import axios from "axios";
 
 
 
@@ -29,8 +30,10 @@ export const Registeration=function({navigation}){
     //to set and get error message
     const [errorMessages,setErrorMessages]=useState({})
 
-    //Validation Function called whenever register butto is clicked
+    //Validation Function called whenever register button is clicked
     const validation=()=>{
+        //register needs to remove from here
+        register();
         //first close the keyboard
         Keyboard.dismiss();
         let valid=true;
@@ -76,12 +79,19 @@ export const Registeration=function({navigation}){
     const [loader,setLoader]=useState(false)
 
     const register=()=>{
+      
+           let s=registeration(inputList.name,inputList.email,inputList.password)
+           alert(s)
+           if(s===true){
+            sendOTP()
+           }
+       
         setLoader(true);
         setTimeout(()=>{
             setLoader(false);
             try{
                // AsyncStorage.setItem("user",JSON.stringify(inputList));
-                navigation.navigate("LoginScreen");
+                navigation.navigate("Login");
             }
             catch(error){
                 Alert.alert("Error","Something went wrong")

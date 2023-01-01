@@ -10,6 +10,7 @@ import generalStyles from "../../files/generalStyle";
 import PageHeading from "../components/PageHeading";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { title } from "process";
+import {signIn} from "../connectionToDB/authentication"
 
 
 
@@ -30,31 +31,7 @@ const validation=async ()=>{
     Keyboard.dismiss();
     let valid=true;
 
-    ////////nEED TO REMOVE THIS IF AFTERWARDS FROM HERE//////////////////////////
-
-    //login to the account using token
-fetch('http://10.0.2.2:3000/user/signin',
-{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({"email":inputList.email , "password":inputList.password})
-}
-)
-.then(res => res.json())
-.then(async (data)=>{
-    console.log(data)
-    try{
-        await AsyncStorage.setItem("token",data.token)
-    }
-    catch(err){
-        console.log("Could not store is async storage ",e)
-    }
-})
-.catch(err=>console.log(err))
-
-    if (valid){
-        login();
-    }
+    login()
 
     //////////////////////////////////////////////////////////////////////////////
 
@@ -84,6 +61,7 @@ fetch('http://10.0.2.2:3000/user/signin',
 const [loader,setLoader]=useState(false)
 
 const login=()=>{
+    signIn(inputList.email,inputList.password)
     setLoader(true);
     setTimeout(()=>{
         setLoader(false);

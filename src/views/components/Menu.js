@@ -1,8 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
-import colors from '../../files/Colors';
-import HomeScreen from '../screens/HomeScreen';
+
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -11,7 +10,7 @@ export default Menu = function () {
     [getColor, setColor] = useState("white");
     const HomePressed=()=>{
         this.color = "grey";
-        navigation.navigate('HomeScreen')
+       // navigation.navigate('HomeScreen')
         
     }
     const TrackerPressed =()=>{
