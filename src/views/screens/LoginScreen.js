@@ -59,27 +59,44 @@ const validation=async ()=>{
 };
 
 const [loader,setLoader]=useState(false)
-
-const login=()=>{
-    signIn(inputList.email,inputList.password)
-    setLoader(true);
-    setTimeout(()=>{
-        setLoader(false);
-        try{
-            navigation.navigate("HomeScreen");
-        }
-        catch(error){
-            Alert.alert("Error","Something went wrong")
-        }
-    }
-    ,3000)
-}
+const [found,setFound]=useState(true)
 
 //Methoda sets the state change in inputList
 const handleOnTextChange=(newText,inputType)=>{
     setInputList(prevInputListState=>({...prevInputListState,[inputType]:newText}));
     console.log("InputList: ",inputList)
 };
+
+const login=async ()=>{
+    await signIn(inputList.email,inputList.password)
+    setLoader(false);
+    setTimeout(async()=>{
+        let val=JSON.parse( await AsyncStorage.getItem("@token"))
+            alert(val.token)
+        // val.token=null   
+        try{
+            
+            if( val.token!=null ){
+            
+            setLoader(false);
+            navigation.navigate("HomeScreen");
+            }
+            else{
+                handleOnTextChange("","password")
+                handleOnTextChange("","email")
+            setLoader(false);
+            setFound(false)
+        }
+        }
+        catch(error){
+            alert(err)
+            Alert.alert("Error","Something went wrong")
+        }
+    }
+    ,3000)
+}
+
+
 
 const handleErrorMessage=(newerrorMessage,inputType)=>{
     setErrorMessages(prevState=>({...prevState,[inputType]:newerrorMessage}));
@@ -101,6 +118,7 @@ return(<SafeAreaView style={styles.container}>
           placeholder="Enter your email"
           onChangeText={text=>handleOnTextChange(text,"email")}
           errorMessage={errorMessages.email}
+          value={inputList.email}
           onFocus={()=>{handleErrorMessage(null,"email")}}
           />
 
@@ -111,6 +129,7 @@ return(<SafeAreaView style={styles.container}>
           password
           onChangeText={text=>handleOnTextChange(text,"password")}
           errorMessage={errorMessages.password}
+          value={inputList.password}
           onFocus={()=>{handleErrorMessage(null,"password")}}
           />
           <TouchableOpacity onPress={()=>{navigation.navigate("ForgetPassword")}}>
@@ -122,6 +141,10 @@ return(<SafeAreaView style={styles.container}>
               <Text style={styles.forgetPasswordText}  >Don't have an account? Register!</Text>
       </TouchableOpacity>
       </View>
+
+      {(!found)?(<View>
+        <Text>USER NOT FOUND</Text>
+      </View>):null}
   </ScrollView>
 </SafeAreaView>
 )

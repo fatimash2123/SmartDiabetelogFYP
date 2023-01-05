@@ -38,6 +38,7 @@ import ForgetPassword from "./src/views/screens/ForgetPassword";
 import EnterCode from "./src/views/screens/EnterCode";
 import Retinopathy from "./src/views/screens/Retinopathy";
 import Profile from "./src/views/screens/Profile";
+import { Input } from "./src/views/components/input";
 const Stack = createNativeStackNavigator();
 
 export default function App(){
@@ -94,6 +95,7 @@ export default function App(){
         <Stack.Screen name="EnterCode" component={EnterCode}/>
         <Stack.Screen name="Retinopathy" component={Retinopathy}/>
         <Stack.Screen name="Profile" component={Profile}/>
+        <Stack.Screen name="Input" component={Input}/>
 
         {/* {
           isloggedIn===null ? 

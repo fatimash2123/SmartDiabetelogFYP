@@ -1,8 +1,30 @@
+import { useState } from "react";
 import React from "react-native";
 import {StyleSheet,SafeAreaView,View,Text,ScrollView,TouchableOpacity} from "react-native";
 import { Input } from "../components/input";
+import {addBloodPressureRecord} from "../connectionToDB/tracker"
+import {viewBloodPressureInstance} from "../connectionToDB/tracker"
 
-export default function AddBloodPressure({navigation}){
+export default function AddBloodPressure({navigation,route}){
+    if(route.params!==undefined)
+   { const id=route.params.id
+    alert(route.params.id)
+    if(id!==null){
+        viewBloodPressureInstance()
+    }}
+    
+
+
+    const [inputList,setInputList]=useState({disystolic:"",systolic:"",description:""});
+    const save=()=>{
+        addBloodPressureRecord(inputList.disystolic,inputList.systolic,inputList.description)
+    }
+
+    //Method sets the state change in inputList
+    const handleOnTextChange=(newText,inputType)=>{
+    setInputList(prevInputListState=>({...prevInputListState,[inputType]:newText}));
+    console.log("InputList: ",inputList)
+};
     return(
     <SafeAreaView style={styles.container}>
         <View style={styles.textView}>
@@ -19,6 +41,7 @@ export default function AddBloodPressure({navigation}){
 
             <View style={styles.inputContainer}>
                 <Input label="Disystolic Pressure"
+                onChangeText={text=>handleOnTextChange(text,"disystolic")}
                 placeholder="Enter your disystolic pressure"
                 inputBackground="white"
                 textColor="black"/>
@@ -26,6 +49,7 @@ export default function AddBloodPressure({navigation}){
 
             <View style={styles.inputContainer}>
                 <Input label="Systolic Pressure"
+                onChangeText={text=>handleOnTextChange(text,"systolic")}
                 placeholder="Enter your Systolic pressure"
                 multiline={false}
                 inputBackground="white"
@@ -35,6 +59,7 @@ export default function AddBloodPressure({navigation}){
 
             <View style={styles.inputContainer}>
             <Input label="Notes" 
+            onChangeText={text=>handleOnTextChange(text,"description")}
                 placeholder="Enter a Description" 
                 multiline={true}
                 inputBackground="white" 
@@ -42,7 +67,8 @@ export default function AddBloodPressure({navigation}){
                />
             </View>
 
-            <TouchableOpacity style={styles.saveButtonContainer}>
+            <TouchableOpacity style={styles.saveButtonContainer}
+            onPress={()=>{save()}}>
                 <Text style={styles.saveButtonText}>Save</Text>
             </TouchableOpacity>
 

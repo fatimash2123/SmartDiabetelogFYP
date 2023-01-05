@@ -1,10 +1,28 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import {View,StyleSheet,Text,Image, SafeAreaView, ScrollView,Button, TextInput, FlatList, TouchableOpacity, ImageBackground} from "react-native";
+import {viewBloodPressureRecord} from "../connectionToDB/tracker"
 
+export default ViewBloodPressure= function ({navigation}){
+    const [mount,setMount]=useState(0)
+    const [data,setData]=useState([]);//[{s:120,d:80},{s:133,d:90},{s:100,d:70},{s:120,d:99},{s:170,d:100}];
 
+    const loadDataOnlyOnce = async() => {
+       // alert("loadDataOnlyOnce");
+         const d= await viewBloodPressureRecord();
+        console.log(d)
+        console.log(d[0])
+        setData(d);
+        
+      };
+      
+          useEffect(() => {
+            if(mount===0){
+              loadDataOnlyOnce(); 
+              setMount((oldVal)=>oldVal++);
+            }
+          },[mount]);
+    
 
-export default ViewBloodPressure=function({navigation}){
-    const data=[{s:120,d:80},{s:133,d:90},{s:100,d:70},{s:120,d:99},{s:170,d:100}];
     return(
         <SafeAreaView style={styles.container1}>
            <View style={styles.textView}>
@@ -19,13 +37,14 @@ export default ViewBloodPressure=function({navigation}){
             renderItem={({item})=>{
                 return(
                    
-                    <TouchableOpacity style={styles.instanceContainer}>
+                    <TouchableOpacity style={styles.instanceContainer}
+                    onPress={()=>{navigation.navigate("AddBloodPressure",{"id":item._id})}}>
                          <ImageBackground source={require("../../files/Images/bp.jpg")} style={styles.instanceImage}>
                         
      
                             <View style={styles.readingsContainer}>
-                                <Text style={styles.sText}>{item.s}</Text>
-                                <Text style={styles.dText}>{item.d}</Text>
+                                <Text style={styles.sText}>{item.systolic}</Text>
+                                <Text style={styles.dText}>{item.disystolic}</Text>
                             </View>
 
                             </ImageBackground>  

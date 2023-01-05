@@ -8,8 +8,7 @@ import Loader from "../components/loader";
 import generalStyles from "../../files/generalStyle";
 import colors from "../../files/Colors";
 import{registeration} from "../connectionToDB/authentication"
-import {sendOTP} from "../connectionToDB/authentication"
-import axios from "axios";
+
 
 
 
@@ -79,19 +78,15 @@ export const Registeration=function({navigation}){
     const [loader,setLoader]=useState(false)
 
     const register=()=>{
-      
-           let s=registeration(inputList.name,inputList.email,inputList.password)
-           alert(s)
-           if(s===true){
-            sendOTP()
-           }
-       
+           registeration(inputList.name,inputList.email,inputList.password)
+
+          
         setLoader(true);
         setTimeout(()=>{
             setLoader(false);
             try{
                // AsyncStorage.setItem("user",JSON.stringify(inputList));
-                navigation.navigate("Login");
+                navigation.navigate("EnterCode");
             }
             catch(error){
                 Alert.alert("Error","Something went wrong")
