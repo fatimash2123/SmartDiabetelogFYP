@@ -10,96 +10,148 @@ exports.checkRoot = () => {
 
 
 exports.registeration = (name, email, password) => {
-       let state = false;
-       axios.post("http://10.0.2.2:3000/register",
-              {
-                     "name": name,
-                     "email": email,
-                     "password": password
-              }
-       )
-              .then((res) => {
-                     if (res.data.error !== undefined) {
-                            console.log("Email already exists");
+       return new Promise((resolve, reject) => {
+              axios.post("http://10.0.2.2:3000/register",
+                     {
+                            "name": name,
+                            "email": email,
+                            "password": password
                      }
-                     if (res.data.token !== undefined) {
-                            console.log("token is", JSON.stringify(res.data.token));
-                            storeTokenInStorage(res.data.token)
-                     }
-              })
-              .catch((err) => {
-                     console.log("Error in registration " + err)
+              )
+                     .then(async (res) => {
+                            if (res.data.token !== undefined) {
+                                   console.log("token is", JSON.stringify(res.data.token));
+                                   //const token = await storeTokenInStorage(res.data.token)
+                                   storeTokenInStorage(res.data.token).then((token) => {
+                                          console.log(token)
+                                          console.log("token in registeration is", token)
+                                          return resolve(token)
+                                   }).catch((err) => {
+                                          // console.log(err.response.status)
+                                          console.log("Error in registration " + err)
+                                          return reject(err)
+                                   })
 
-              })
+                            }
+                     })
+                     .catch((err) => {
+                            // console.log(err.response.status)
+                            console.log("Error in registration " + err)
+                            return reject(err)
+                     })
 
+       })
 }
 
 exports.signIn = (email, password) => {
-       var status=""
-       axios.post("http://10.0.2.2:3000/login",
-              {
-                     "email": email,
-                     "password": password
-              }
-       )
-              .then(async (res) => {
-                     if (res.data.error !== undefined) {
-                            console.log("user not found");
+       return new Promise((resolve,reject)=>{
+              var status = ""
+              axios.post("http://10.0.2.2:3000/login",
+                     {
+                            "email": email,
+                            "password": password
                      }
-                     if (res.data.token !== undefined) {
-                            status= "success"
-                            console.log("token is", res.data.token);
-                            await storeTokenInStorage(res.data.token,"login")
-                     }          
-              })
-              .catch((err) => {
-                     console.log("Error signIn: ",err)    
-              })
+              )
+                     .then((res) => {
+                            console.log(res)
+                            if (res.data.token !== undefined) {
+                                   status = "success"
+                                   console.log("token is", res.data.token);
+                                   storeTokenInStorage(res.data.token, "login")
+                                   .then(token=>{
+                                          console.log("token in signin after storing in asyncstorage is",token)
+                                          resolve();
+                                   })
+                                   .catch(err=>{console.log("Error signIn1: ", err),reject(err)})
+
+                            }
+                     })
+                     .catch((err) => {
+                            console.log("Error signIn2: ", err)
+                            reject(err)
+                     })
+
+       })
 }
 
-const storeTokenInStorage = async (value,methodType="register") => {
-       try {
-              console.log("token in store data is ", JSON.stringify(value))
+const storeTokenInStorage = (value, methodType = "register") => {
+       //value contains token
+       //method type could be login or register
+       return new Promise((resolve, reject) => {
+              console.log("token to be stored is ", JSON.stringify(value))
               const obj = { "token": value }
-              await AsyncStorage.setItem("@token", JSON.stringify(obj))
-              const data = await AsyncStorage.getItem(("@token"))
-              console.log(`in Asyncstorage token is= ${JSON.parse(data).token}`)
-              if(methodType==="register")
-              {sendOTP()}
-       }
-       catch (err) {
-              console.log(err)
-       }
-       return true
+              //storage for register
+              if (methodType === "register") {
+                     AsyncStorage.setItem("@registerToken", JSON.stringify(obj)).then(async() => {
+                            const data = await AsyncStorage.getItem(("@registerToken"))
+                            const token = JSON.parse(data).token
+                            console.log(`In Asyncstorage register token is= ${JSON.parse(data).token}`)
+                            resolve(token)
+                            //sendOTP(JSON.parse(data).token)
+                     }).catch((err) => {
+                            console.log("storeTokenInStorage error ", err)
+                            reject(err)
+                     })
+
+              }
+              //storage for login
+              else {
+                     AsyncStorage.setItem("@token", JSON.stringify(obj)).then(async() => {
+                            const data = await AsyncStorage.getItem(("@token"))
+                            const token = JSON.parse(data).token
+                            console.log(`in Asyncstorage token for login is= ${JSON.parse(data).token}`)
+                            resolve(token)
+
+                     }).catch((err) => {
+                            console.log("storeTokenInStorage error ", err)
+                            reject(err)
+                     })
+
+              }
+       })
 }
 
 //send OTP code to email of the user
-exports.sendOTP = async () => {
-       console.log("IN otp")
-       try {
-              const token = (JSON.parse(await AsyncStorage.getItem("@token")).token)
+exports.sendOTP = (token) => {
+       //recieves token from register
+       console.log("In sendOTP")
+       return new Promise((resolve, reject) => {
               console.log("token in otp ", token)
-              const res = await axios.get("http://10.0.2.2:3000/otp/sendemail",
+              axios.get("http://10.0.2.2:3000/otp/sendemail",
                      { headers: { "Authorization": "Bearer " + token } })
-              console.log(res.data);
-              storeOTP(res.data)
-       }
-       catch (err) {
-              console.log(err);
-       }
+                     .then((res) => {
+                            console.log(res.data);
+                            storeOTP(res.data)
+                                   .then(() => { resolve() })
+                                   .catch((err) => {
+                                          console.log("sendOTP error", err);
+                                          reject(err)
+                                   })
+                     })
+                     .catch((err) => {
+                            console.log("sendOTP error", err);
+                            reject(err)
+                     })
+       })
 }
 
 //store OTP Code send to email in AsyncStorage
-const storeOTP = async (data) => {
-       try {
+const storeOTP = (data) => {
+       return new Promise((resolve, reject) => {
+              console.log("In storeOTP")
+
               console.log("\nStoring OTP in AsyncStorage", data.code)
               if (data !== null) {
-                     await AsyncStorage.setItem("@OTP", JSON.stringify(data.code))
+                     AsyncStorage.setItem("@OTP", JSON.stringify(data.code)).then(() => {
+                            resolve()
+                     }).catch((err) => {
+                            console.log("Error: StoreOTP= ", err)
+                            reject()
+                     })
               }
-       }
-       catch (err) {
-              console.log("Error: StoreOTP= ", err)
-       }
+
+       })
+
 }
 
 
@@ -119,21 +171,24 @@ exports.getOTP = async (data) => {
 }
 
 //verify user registration process
-exports.verifyUser = async() => {
-       const token = (JSON.parse(await AsyncStorage.getItem("@token")).token)
+exports.verifyUser = async () => {
+       return new Promise(async(resolve,reject)=>{
+
+              const token = (JSON.parse(await AsyncStorage.getItem("@registerToken")).token)
        axios.patch("http://10.0.2.2:3000/",
               { "userVerified": "true" },
               { headers: { "Authorization": "Bearer " + token } })
               .then((res) => {
                      if (res.data.status !== undefined) {
-                            console.log("changes successfully maintained");
-                     }
-                     if (res.data.error !== undefined) {
-                            console.log("changes failed");
+                            console.log("changes successfully maintained in verifyUser");
+                            console.log(res.data)
+                            resolve(res.data)
                      }
               })
               .catch((err) => {
                      console.log("Error: verifyUser= ", err)
-
+                     reject(err)
               })
+       })
+       
 }
