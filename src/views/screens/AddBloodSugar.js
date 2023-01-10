@@ -23,7 +23,7 @@ export default AddBloodSugar = function ({ navigation, route }) {
     const [existingItem, setExistingItem] = useState(null)
     const [mount,setMount]=useState(0)
     const loadDataOnlyOnce = async() => {
-        alert("loadDataOnlyOnce");
+       // alert("loadDataOnlyOnce");
         if (route.params !== undefined) {
             const id = route.params.id
            // alert(route.params.id)
@@ -31,15 +31,7 @@ export default AddBloodSugar = function ({ navigation, route }) {
                 viewBloodSugarInstance(id)
                     .then((res) => { 
                         console.log("In ",res)
-                        setExistingItem(()=>{return{
-                            "id":res._id,
-                            "concentration": res.concentration,
-                            "unit": res.unit,
-                            "description": res.description,
-                            "event": res.event,
-                            "creationDate": res.creationDate,
-                            "creationTime": res.creationTime
-                        }});
+                        setExistingItem(res);
                         setInputList(()=>{return{
                             "concentration": res.concentration,
                             "unit": res.unit,
@@ -61,30 +53,31 @@ export default AddBloodSugar = function ({ navigation, route }) {
               loadDataOnlyOnce(); 
               setMount((oldVal)=>oldVal++);
             }
+            const date = `${(new Date()).getDate()}-${(new Date()).getMonth() + 1}-${(new Date()).getFullYear()}`
+            const time = `${(new Date()).getHours()}:${(new Date()).getMinutes()}`
+             handleOnTextChange(date, "creationDate")
+            handleOnTextChange(time, "creationTime")
           },[mount]);
     
   
   
     const save = () => {
-        const date = `${(new Date()).getDate()}-${(new Date()).getMonth() + 1}-${(new Date()).getFullYear()}`
-        const time = `${(new Date()).getHours()}:${(new Date()).getMinutes()}`
-        handleOnTextChange(date, "creationDate")
-        handleOnTextChange(time, "creationTime")
-        //alert(date)
+       
+        // alert(date)
         // alert(time)
         addBloodSugarRecord(inputList.concentration, inputList.unit, inputList.description, inputList.event, inputList.creationDate, inputList.creationTime)
-            .then((data) => { console.log("abc", data) })
+            .then((data) => { console.log("abc", data) ; navigation.push("ViewBloodSugar")})
             .catch((err) => { console.log("Error in save in add blood sugar", err) })
     }
 
     const update=()=>{
         updateBloodSugarRecord(route.params.id,inputList.concentration, inputList.unit, inputList.description, inputList.event, inputList.creationDate, inputList.creationTime)
-            .then((data) => { console.log("update", data) })
+            .then((data) => { console.log("update", data) ;navigation.push("ViewBloodSugar")})
             .catch((err) => { console.log("Error in update in add blood sugar", err) })
     }
     const deleteItem=()=>{
         deleteBloodSugarInstance(route.params.id)
-            .then((data) => { console.log("delete", data) })
+            .then((data) => { console.log("delete", data) ;navigation.push("ViewBloodSugar")})
             .catch((err) => { console.log("Error in delete in add blood sugar", err) })
     }
 

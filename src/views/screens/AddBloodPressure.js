@@ -1,24 +1,66 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import React from "react-native";
 import { StyleSheet, SafeAreaView, View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { Input } from "../components/input";
-import { addBloodPressureRecord } from "../connectionToDB/trackerBloodPressure"
-import { viewBloodPressureInstance } from "../connectionToDB/trackerBloodPressure"
+import { addBloodPressureRecord,viewBloodPressureInstance,updateBloodPressureRecord,deleteBloodPressureInstance } from "../connectionToDB/trackerBloodPressure"
+
 
 export default function AddBloodPressure({ navigation, route }) {
-    if (route.params !== undefined) {
-        const id = route.params.id
-        alert(route.params.id)
-        if (id !== null) {
-            viewBloodPressureInstance()
+    
+
+    const [existingItem, setExistingItem] = useState(null)
+    const [mount, setMount] = useState(0)
+    const loadDataOnlyOnce = async () => {
+        //alert("loadDataOnlyOnce");
+        if (route.params !== undefined) {
+            const id = route.params.id
+            // alert(route.params.id)
+            if (id !== undefined) {
+                viewBloodPressureInstance(id)
+                    .then((res) => {
+                        console.log("In ", res)
+                        setExistingItem( res );
+                        setInputList(() => {
+                            return {
+
+                               "disystolic": res.disystolic, "systolic": res.systolic, "description": res.description
+
+                            }
+                        });
+                        console.log("After setting existingItem= ", existingItem)
+
+                    })
+                    .catch((err) => { console.log("Error in AddBloodPressure uploading particular instance ", err) })
+            }
         }
-    }
+
+    };
+    useEffect(() => {
+        if (mount === 0) {
+            loadDataOnlyOnce();
+            setMount((oldVal) => oldVal++);
+        }
+    }, [mount]);
 
 
 
-    const [inputList, setInputList] = useState({ disystolic: "", systolic: "", description: "" });
+
+    const [inputList, setInputList] = useState({ "disystolic": "", "systolic": "", "description": "" });
     const save = () => {
         addBloodPressureRecord(inputList.disystolic, inputList.systolic, inputList.description)
+        navigation.push("ViewBloodPressure")
+    }
+
+    const update=()=>{
+ console.log("JJJJJJJJJ")
+        updateBloodPressureRecord(route.params.id,inputList.disystolic, inputList.systolic, inputList.description)
+            .then((data) => { console.log("update", data),navigation.push("ViewBloodPressure") })
+            .catch((err) => { console.log("Error in update in add bloodpressure", err) })
+    }
+    const deleteItem=()=>{
+        deleteBloodPressureInstance(route.params.id)
+            .then((data) => { console.log("delete", data),navigation.push("ViewBloodPressure") })
+            .catch((err) => { console.log("Error in delete in add bloodpressure", err) })
     }
 
     //Method sets the state change in inputList
@@ -34,14 +76,15 @@ export default function AddBloodPressure({ navigation, route }) {
 
             <ScrollView style={styles.container2}
                 showsVerticalScrollIndicator={false}>
-                <View style={styles.inputContainer}>
+                {/* <View style={styles.inputContainer}>
                     <Picker pickertitle="Select Time" pickermode="time"
                         textColor="#212529"
                         buttonColor="#6B705C" />
-                </View>
+                </View> */}
 
                 <View style={styles.inputContainer}>
                     <Input label="Disystolic Pressure"
+                    value={`${inputList.disystolic}`}
                         onChangeText={text => handleOnTextChange(text, "disystolic")}
                         placeholder="Enter your disystolic pressure"
                         inputBackground="white"
@@ -50,6 +93,7 @@ export default function AddBloodPressure({ navigation, route }) {
 
                 <View style={styles.inputContainer}>
                     <Input label="Systolic Pressure"
+                     value={`${inputList.systolic}`}
                         onChangeText={text => handleOnTextChange(text, "systolic")}
                         placeholder="Enter your Systolic pressure"
                         multiline={false}
@@ -60,6 +104,7 @@ export default function AddBloodPressure({ navigation, route }) {
 
                 <View style={styles.inputContainer}>
                     <Input label="Notes"
+                     value={`${inputList.description}`}
                         onChangeText={text => handleOnTextChange(text, "description")}
                         placeholder="Enter a Description"
                         multiline={true}
@@ -68,10 +113,26 @@ export default function AddBloodPressure({ navigation, route }) {
                     />
                 </View>
 
-                <TouchableOpacity style={styles.saveButtonContainer}
-                    onPress={() => { save() }}>
-                    <Text style={styles.saveButtonText}>Save</Text>
-                </TouchableOpacity>
+
+                {
+
+existingItem === null ?
+    (<TouchableOpacity style={styles.saveButtonContainer} onPress={save}>
+        <Text style={styles.saveButtonText} >Save</Text>
+    </TouchableOpacity>) :
+    (<View>
+        <TouchableOpacity style={styles.saveButtonContainer}
+        onPress={()=>{update()}}>
+            <Text style={styles.saveButtonText}>Update</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.saveButtonContainer}
+        onPress={()=>{deleteItem()}}>
+            <Text style={styles.saveButtonText}>Delete</Text>
+        </TouchableOpacity>
+    </View>
+    )
+
+}
 
             </ScrollView>
 

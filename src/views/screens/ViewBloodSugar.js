@@ -11,7 +11,7 @@ export default ViewBloodSugar=({navigation})=>{
     const [sugarData,setSugarData]=useState([]);//[{s:120,d:80},{s:133,d:90},{s:100,d:70},{s:120,d:99},{s:170,d:100}];
 
     const loadDataOnlyOnce = async() => {
-        alert("loadDataOnlyOnce");
+       // alert("loadDataOnlyOnce");
          viewBloodSugarRecord()
          .then((res)=>{
             console.log(res)
@@ -95,7 +95,7 @@ export default ViewBloodSugar=({navigation})=>{
         
         <TouchableOpacity style={styles.addButton}
         onPress={()=>{
-            navigation.navigate("AddBloodSugar");
+            navigation.push("AddBloodSugar");
         }}>
             <Text style={styles.addButtonText}>+</Text>
         </TouchableOpacity>

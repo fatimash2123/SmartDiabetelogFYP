@@ -41,3 +41,18 @@ exports.editProfileInformation = async (name, email, weight, heightFeet, heightI
             .catch((err) => { console.log("Error in editProfileInformation ", err); reject(err) })
     })
 }
+
+//delete  user acount
+exports.deleteAccount = async () => {
+    return new Promise(async (resolve, reject) => {
+        const token = (JSON.parse(await AsyncStorage.getItem("@token")).token)
+        const res = await axios.delete(`http://10.0.2.2:3000/`,
+            {
+                headers: { "Authorization": "Bearer " + token },
+            }
+        )
+            .then((res) => { console.log(res.data); resolve(res.data) })
+
+            .catch((err) => { console.log("Error in deleteAccount ", err); reject(err) })
+    })
+}

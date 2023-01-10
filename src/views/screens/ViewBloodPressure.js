@@ -59,7 +59,7 @@ export default ViewBloodPressure= function ({navigation}){
            
         <TouchableOpacity style={styles.addButton}
         onPress={()=>{
-            navigation.navigate("AddBloodPressure");
+            navigation.push("AddBloodPressure");
         }}>
             <Text style={styles.addButtonText}>+</Text>
         </TouchableOpacity>
